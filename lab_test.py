@@ -10,14 +10,12 @@ labs = os.listdir()
 for lab in labs:
     capture = re.compile("((.*)_lab1).py")
     s = capture.findall(lab)
+    data = []
     if s != []:
-        data = []
-        print(s[0][0])
         try:
-            testing_module_1.test(s[0][0], s[0][1])
+            data.append(testing_module_1.test(s[0][0], s[0][1]))
+            print("Graded:", s[0][0])
         except:
-            print("Bad module", s[0][0])
-            
-        #print(s[0][1])
-        #setData(score, "scores")
+            print("Couldn't process: check out", s[0][0])
+crw.setData("scores", data)
     
