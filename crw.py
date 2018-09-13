@@ -24,12 +24,13 @@ def makePath(path):
     # make the path if not already there - once per char load hahaha
     os.makedirs(path) if not os.path.exists(path) else True
 
-def setData(path, data):
-    with open(path + ".csv", "w", newline='') as data_file:
+def setData(path, title, data):
+    makePath(path)
+    with open(path + title + ".csv", "w", newline='') as data_file:
         writer = csv.writer(data_file, delimiter=',')
         for item in data:
             writer.writerow(item)
-    print("Saved " + path + ".csv")
+    print("Saved " + path + title + ".csv")
 
 
 def clean_row(row):
