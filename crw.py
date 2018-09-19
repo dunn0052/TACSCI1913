@@ -22,7 +22,7 @@ def findData(file, name):
 
 def makePath(path):
     # make the path if not already there - once per char load hahaha
-    os.makedirs(path) if not os.path.exists(path) else True
+    os.makedirs(path) if not os.path.exists(path) else pass
 
 def setData(path, title, data):
     makePath(path)
@@ -30,6 +30,7 @@ def setData(path, title, data):
         writer = csv.writer(data_file, delimiter=',')
         for item in data:
             writer.writerow(item)
+    data_file.close()
     print("Saved " + path + title + ".csv")
 
 
@@ -57,5 +58,3 @@ def clean_item(item):
         return None
     else:
         return item
-
-    
