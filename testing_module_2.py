@@ -24,18 +24,16 @@ def test(file, name, path = None):
 #  Every test is followed by a comment which shows what must be printed if your
 #  code works correctly. It also shows how many points the test is worth.
 #
-
     try:
-      z = Zillion('')
+      z = test.Zillion('')
       data.append(False)
     except RuntimeError:
       print('Empty string')
       data.append(True)
-
     # It must print 'Empty string' without apostrophes. 2 points.
 
     try:
-      z = Zillion(' , ')
+      z = test.Zillion(' , ')
       data.append(False)
     except RuntimeError:
       print('No digits in the string')
@@ -44,7 +42,7 @@ def test(file, name, path = None):
     # It must print 'No digits in the string' without apostrophes. 2 points.
 
     try:
-      z = Zillion('1+0')
+      z = test.Zillion('1+0')
       data.append(False)
     except RuntimeError:
       print('Non-digit in the string')
@@ -53,7 +51,7 @@ def test(file, name, path = None):
     # It must print 'Non-digit in the string' without apostrophes. 2 points.
 
     try:
-      z = Zillion('0')
+      z = test.Zillion('0')
       data.append(True)
     except RuntimeError:
       print('This must not be printed')
@@ -61,10 +59,10 @@ def test(file, name, path = None):
 
     #  It must print nothing. 2 points.
 
-    data.append(testItem(z.isZero(), True))    #  It must print True. 2 points.
+    data.append(testItem(test.z.isZero(), True))    #  It must print True. 2 points.
 
     try:
-      z = Zillion('000000000')
+      z = test.Zillion('000000000')
       data.append(True)
     except RuntimeError:
       print('This must not be printed')
@@ -72,10 +70,10 @@ def test(file, name, path = None):
 
     #  It must print nothing. 2 points.
 
-    data.append(testItem(z.isZero(), True))    #  It must print True. 2 points.
+    data.append(testItem(test.z.isZero(), True))    #  It must print True. 2 points.
 
     try:
-      z = Zillion('000 000 000')
+      z = test.Zillion('000 000 000')
       data.append(True)
     except RuntimeError:
       print('This must not be printed')
@@ -83,10 +81,10 @@ def test(file, name, path = None):
 
     #  It must print nothing. 2 points.
 
-    data.append(testItem(z.isZero(), True))    #  It must print True. 2 points.
+    data.append(testItem(test.z.isZero(), True))    #  It must print True. 2 points.
 
     try:
-      z = Zillion('997')
+      z = test.Zillion('997')
       data.append(True)
     except RuntimeError:
       print('This must not be printed')
@@ -94,24 +92,24 @@ def test(file, name, path = None):
 
     #  It must print nothing.  2 points.
 
-    data.append(testItem(z.isZero(), False))    #  It must print False. 2 points.
+    data.append(testItem(test.z.isZero(), False))    #  It must print False. 2 points.
 
-    data.append(testItem(z.toString(), "997"))  #  It must print 997. 2 points.
-
-    z.increment()
-
-    data.append(testItem(z.toString(), "998"))  #  It must print 998. 2 points.
+    data.append(testItem(test.z.toString(), "997"))  #  It must print 997. 2 points.
 
     z.increment()
 
-    data.append(testItem(z.toString(), "999"))  #  It must print 999. 2 points.
+    data.append(testItem(test.z.toString(), "998"))  #  It must print 998. 2 points.
 
     z.increment()
 
-    data.append(testItem(z.toString(), "1000"))  #  It must print 1000. 2 points.
+    data.append(testItem(test.z.toString(), "999"))  #  It must print 999. 2 points.
+
+    z.increment()
+
+    data.append(testItem(test.z.toString(), "1000"))  #  It must print 1000. 2 points.
 
     try:
-      z = Zillion('0 9,9 9')
+      z = test.Zillion('0 9,9 9')
       data.append(True)
     except:
       print('This must not be printed')
@@ -120,7 +118,7 @@ def test(file, name, path = None):
     #  It must print nothing.  3 points.
 
     z.increment()
-    data.append(testItem(z.toString(), "1000"))  #  It must print 1000. 2 points.
+    data.append(testItem(test.z.toString(), "1000"))  #  It must print 1000. 2 points.
 
     ### end test
     return data
