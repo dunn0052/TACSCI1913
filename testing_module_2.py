@@ -4,9 +4,13 @@ import importlib.util
 
 #test file
 def test(file, name, path = None):
-    spec = importlib.util.spec_from_file_location(file, path)
-    test = importlib.util.module_from_spec(spec)
-    spec.loader.exec_module(test)
+    try:
+        spec = importlib.util.spec_from_file_location(file, path)
+        test = importlib.util.module_from_spec(spec)
+        spec.loader.exec_module(test)
+    except:
+        print("Couldn't load module %.\nCheck file manually." % (name))
+        return []
     #lookFor(file, "list")
     #test = __import__(file)
 
@@ -59,7 +63,7 @@ def test(file, name, path = None):
 
     #  It must print nothing. 2 points.
 
-    data.append(testItem(test.z.isZero(), True))    #  It must print True. 2 points.
+    data.append(testItem(z.isZero, True))    #  It must print True. 2 points.
 
     try:
       z = test.Zillion('000000000')
@@ -70,7 +74,7 @@ def test(file, name, path = None):
 
     #  It must print nothing. 2 points.
 
-    data.append(testItem(test.z.isZero(), True))    #  It must print True. 2 points.
+    data.append(testItem(z.isZero, True))    #  It must print True. 2 points.
 
     try:
       z = test.Zillion('000 000 000')
@@ -81,7 +85,7 @@ def test(file, name, path = None):
 
     #  It must print nothing. 2 points.
 
-    data.append(testItem(test.z.isZero(), True))    #  It must print True. 2 points.
+    data.append(testItem(z.isZero, True))    #  It must print True. 2 points.
 
     try:
       z = test.Zillion('997')
@@ -92,21 +96,21 @@ def test(file, name, path = None):
 
     #  It must print nothing.  2 points.
 
-    data.append(testItem(test.z.isZero(), False))    #  It must print False. 2 points.
+    data.append(testItem(z.isZero, False))    #  It must print False. 2 points.
 
-    data.append(testItem(test.z.toString(), "997"))  #  It must print 997. 2 points.
-
-    z.increment()
-
-    data.append(testItem(test.z.toString(), "998"))  #  It must print 998. 2 points.
+    data.append(testItem(z.toString, "997"))  #  It must print 997. 2 points.
 
     z.increment()
 
-    data.append(testItem(test.z.toString(), "999"))  #  It must print 999. 2 points.
+    data.append(testItem(z.toString, "998"))  #  It must print 998. 2 points.
 
     z.increment()
 
-    data.append(testItem(test.z.toString(), "1000"))  #  It must print 1000. 2 points.
+    data.append(testItem(z.toString, "999"))  #  It must print 999. 2 points.
+
+    z.increment()
+
+    data.append(testItem(z.toString, "1000"))  #  It must print 1000. 2 points.
 
     try:
       z = test.Zillion('0 9,9 9')
@@ -118,15 +122,16 @@ def test(file, name, path = None):
     #  It must print nothing.  3 points.
 
     z.increment()
-    data.append(testItem(test.z.toString(), "1000"))  #  It must print 1000. 2 points.
+    data.append(testItem(z.toString, "1000"))  #  It must print 1000. 2 points.
 
     ### end test
+    
     return data
 
 
 def testItem(function, key):
     try:
-        return function == key
+        return function() == key
     except:
         print("Couldn't run", str(function), "for", name)
         return False
