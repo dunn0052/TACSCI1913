@@ -25,7 +25,7 @@ def makePath(path):
     os.makedirs(path) if not os.path.exists(path) else True
 
 def setData(path, title, data):
-    #makePath(path)
+    makePath(path)
     with open(path + title + ".csv", "w", newline='') as data_file:
         writer = csv.writer(data_file, delimiter=',')
         for item in data:
