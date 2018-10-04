@@ -14,7 +14,7 @@ directory_path = os.path.dirname(os.path.realpath(__file__))
 labs = os.listdir(directory_path + grade_path)
 data = []
 reject = []
-capture_string ="((.*)_lab"+lab_number+").py"
+capture_string ="((.*)_lab"+lab_number+").java"
 
 for lab in labs:
     capture = re.compile(capture_string)
