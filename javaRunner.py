@@ -1,8 +1,11 @@
 import subprocess, platform
 
-def javaC(file):
+def plat():
+	return platform.system()
+
+def javaC(path, file):
     try:
-        command = ["javac", file+".java"]
+        command = ["javac", path+file+".java"]
         subprocess.run(command, shell=True)
         print("Java compiled", file+".java")
         return 0
@@ -11,16 +14,23 @@ def javaC(file):
         return -1
 
 def javaR(path, file):
-    out = subprocess.run(["java", "-cp", path, file], shell=True, capture_output=True).stdout
-    out = out.decode("utf-8")
-    list_out = out.split("\r\n")
-    if list_out[-1] == "":
-        list_out.pop()
-    return list_out
+	if plat() == "Windows":
+                out = subprocess.run(["java", "-cp", path, file], shell=True, capture_output=True).stdout
+                out = out.decode("utf-8")
+                list_out = out.split("\r\n")
+	elif plat() == "Linux":
+                out = subprocess.check_output(["java", "-classpath", path , file])
+                out = out.decode("utf-8")
+                list_out = out.split("\n")
+	if list_out[-1] == "":
+		list_out.pop()
+	return list_out
 
 def clear(path = None):
-    sys = platform.system() #different commands for each system
+    sys = plat() #different commands for each system
+ 
     if sys == "Linux":
-        subprocess.run(["rm", "-rf", path + "*.class"], shell=True)
+        print(path + "/*.class")
+        subprocess.run(["rm", "-rf", path + "/*.class"], shell=True)
     elif sys == "Windows":
         subprocess.run(["del", path + "*.class"], shell=True)

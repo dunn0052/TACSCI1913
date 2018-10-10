@@ -7,7 +7,7 @@ def test(file, name, path = None):
     test = ['00', '01', '02', '10', '11', '0000', '0999', '1000', '1999', '2000', '9999', '0000', '0001']
 
     #compile code
-    javaRunner.javaC(file)
+    javaRunner.javaC(path, file)
 
     # get code output
     output = javaRunner.javaR("Driver")
