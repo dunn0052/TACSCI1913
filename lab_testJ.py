@@ -1,14 +1,14 @@
-#grading script lab3
+#grading script lab7
 
 #set grading paths
-lab_number = "6"
+lab_number = "7"
 grade_path = "lab"+lab_number+"_to_grade"
 score_path = "lab"+lab_number+"_scores"
 
 import re
 import os
 import crw
-import testing_module_6 as t
+import testing_module_7 as t
 import platform
 directory_path = os.path.dirname(os.path.realpath(__file__))
 
@@ -26,7 +26,8 @@ for lab in labs:
     capture = re.compile(capture_string)
     s = capture.findall(lab)
     if s != []:
-        score = t.test(file = s[0][0], name = s[0][1], path = grade_path)
+        score = [s[0][1]]
+        score += t.test(file = s[0][0], name = s[0][1], path = grade_path)
         data.append(score)
         print("Graded:", s[0][0], "\n")
     else:
