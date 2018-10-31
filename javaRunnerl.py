@@ -3,10 +3,10 @@ import subprocess, platform, os
 def plat():
         return platform.system()
 
-def javaC(file):
+def javaC(path, file):
         try:
                 # must be path/file instead of /path/file
-                command = ["javac", file+".java"]
+                command = ["javac", path+"/"+file+".java"]
                 if plat() == "Windows":
                     subprocess.run(command, shell=True)
                 elif plat() == "Linux":

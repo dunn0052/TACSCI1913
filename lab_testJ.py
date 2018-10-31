@@ -1,20 +1,21 @@
 #grading script lab3
 
 #set grading paths
-lab_number = "4"
+lab_number = "6"
 grade_path = "lab"+lab_number+"_to_grade"
 score_path = "lab"+lab_number+"_scores"
 
 import re
 import os
 import crw
-import testing_module_4
+import testing_module_6 as t
 import platform
 directory_path = os.path.dirname(os.path.realpath(__file__))
 
 if platform.system() == "Windows":
-    labs = os.listdir("\\"+directory_path + "\\" + grade_path+"\\") #add // because java compiler doesn't takes path instead of /path
-else:
+    print("\\"+directory_path + "\\" + grade_path+"\\")
+    labs = os.listdir(directory_path + "\\" + grade_path+"\\") #add \\ because java compiler doesn't takes path instead of /path
+elif platform.system() == "Linux":
     labs= os.listdir("/"+directory_path+"/"+grade_path+"/") # if linux
     
 data = []
@@ -25,14 +26,14 @@ for lab in labs:
     capture = re.compile(capture_string)
     s = capture.findall(lab)
     if s != []:
-        score = testing_module_4.test(s[0][0], s[0][1], path = grade_path)
+        score = t.test(file = s[0][0], name = s[0][1], path = grade_path)
         data.append(score)
         print("Graded:", s[0][0], "\n")
     else:
         reject.append(lab)
         
 if data:
-    crw.setData(path = directory_path + "/"+score_path , title = "lab"+lab_number+"_scores", data = data)
+    crw.setData(path = directory_path + "\\"+score_path+"\\" , title = "lab"+lab_number+"_scores", data = data)
     if reject:
         print("Files not graded", reject)
 else:
